@@ -1,0 +1,4 @@
+Constructed ID3 Decision Tree:
+{'Outlook': {'Overcast': 'Yes',
+             'Rain': {'Wind': {'Strong': 'No', 'Weak': 'Yes'}},
+             'Sunny': 'No'}}
