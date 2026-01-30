@@ -1,0 +1,24 @@
+Initial Specific Hypothesis (S): ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same']
+Initial General Hypothesis (G): [['?', '?', '?', '?', '?', '?'], ...]
+
+Training Example 1: ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same'] -> Yes
+Specific Hypothesis (S): ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same']
+
+Training Example 2: ['Sunny', 'Warm', 'High', 'Strong', 'Warm', 'Same'] -> Yes
+Specific Hypothesis (S): ['Sunny', 'Warm', '?', 'Strong', 'Warm', 'Same']
+
+Training Example 3: ['Rainy', 'Cold', 'High', 'Strong', 'Warm', 'Change'] -> No
+General Hypothesis (G):
+[['Sunny', '?', '?', '?', '?', '?'],
+ ['?', 'Warm', '?', '?', '?', '?'],
+ ...]
+
+Training Example 4: ['Sunny', 'Warm', 'High', 'Strong', 'Cool', 'Change'] -> Yes
+Specific Hypothesis (S): ['Sunny', 'Warm', '?', 'Strong', '?', '?']
+
+Final Specific Hypothesis (S):
+['Sunny', 'Warm', '?', 'Strong', '?', '?']
+
+Final General Hypothesis (G):
+[['Sunny', '?', '?', '?', '?', '?'],
+ ['?', 'Warm', '?', '?', '?', '?']]
