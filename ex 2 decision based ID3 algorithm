@@ -1,0 +1,69 @@
+import pandas as pd
+import numpy as np
+import math
+
+# 1. Function to calculate Entropy
+def calculate_entropy(data, target_col):
+    values, counts = np.unique(data[target_col], return_counts=True)
+    entropy = 0
+    for count in counts:
+        p = count / len(data)
+        entropy -= p * math.log2(p)
+    return entropy
+
+# 2. Function to calculate Information Gain
+def calculate_info_gain(data, feature, target_col):
+    total_entropy = calculate_entropy(data, target_col)
+    values, counts = np.unique(data[feature], return_counts=True)
+    
+    weighted_entropy = 0
+    for i in range(len(values)):
+        subset = data[data[feature] == values[i]]
+        weighted_entropy += (counts[i] / len(data)) * calculate_entropy(subset, target_col)
+        
+    return total_entropy - weighted_entropy
+
+# 3. Recursive ID3 Algorithm
+def id3(data, original_data, features, target_col, parent_class=None):
+    # Stop if all instances belong to the same class
+    if len(np.unique(data[target_col])) <= 1:
+        return np.unique(data[target_col])[0]
+    
+    # Stop if no features are left
+    elif len(features) == 0:
+        return parent_class
+    
+    else:
+        # Default value for this node (majority class)
+        parent_class = np.unique(data[target_col])[np.argmax(np.unique(data[target_col], return_counts=True)[1])]
+        
+        # Select feature with maximum Information Gain
+        item_values = [calculate_info_gain(data, feature, target_col) for feature in features]
+        best_feature_index = np.argmax(item_values)
+        best_feature = features[best_feature_index]
+        
+        # Create tree structure
+        tree = {best_feature: {}}
+        remaining_features = [f for f in features if f != best_feature]
+        
+        # Branch for each unique value of the best feature
+        for value in np.unique(data[best_feature]):
+            sub_data = data[data[best_feature] == value]
+            subtree = id3(sub_data, data, remaining_features, target_col, parent_class)
+            tree[best_feature][value] = subtree
+            
+        return tree
+
+# --- Demonstration ---
+dataset = {
+    'Outlook': ['Sunny', 'Sunny', 'Overcast', 'Rain', 'Rain', 'Rain', 'Overcast', 'Sunny', 'Sunny', 'Rain'],
+    'Wind': ['Weak', 'Strong', 'Weak', 'Weak', 'Weak', 'Strong', 'Strong', 'Weak', 'Weak', 'Weak'],
+    'Play': ['No', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes']
+}
+df = pd.DataFrame(dataset)
+features = ["Outlook", "Wind"]
+
+tree = id3(df, df, features, "Play")
+print("Constructed ID3 Decision Tree:")
+import pprint
+pprint.pprint(tree)
