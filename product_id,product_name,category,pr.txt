@@ -1,0 +1,11 @@
+product_id,product_name,category,price,stock_quantity,supplier_email
+101,Laptop,Electronics,799.99,25,supplier1@example.com
+102,Smartphone,Electronics,599.50,40,supplier2@example.com
+103,Office Chair,Furniture,120.00,15,supplier3@example.com
+104,Desk Lamp,Furniture,45.75,30,supplier4@example.com
+105,Water Bottle,Accessories,15.20,100,supplier5@example.com
+106,Backpack,Accessories,39.99,60,supplier6@example.com
+107,Headphones,Electronics,89.90,50,supplier7@example.com
+108,Coffee Table,Furniture,150.00,10,supplier8@example.com
+109,Notebook,Stationery,3.50,200,supplier9@example.com
+110,Pen Set,Stationery,8.99,150,supplier10@example.com
